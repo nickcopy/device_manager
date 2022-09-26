@@ -5,6 +5,7 @@ interface counterProps {
   startDate: Number;
   amu?: {
     aaa: Number;
+    ggg: String;
   };
 }
 export default function Counter(props: counterProps) {
