@@ -115,3 +115,8 @@ useEffect(() => {
       .then((json) => console.log(json));
   }, []);
 ```
+
+# 중간팁
+
+`// @ts-ignore`
+위에 코드는 typescript를 밑에 한줄만 잠시 우회하는 코드이다. \*주의: 잠시만 오류을 우회하는 방법일뿐 해결점이 될수는 없다.

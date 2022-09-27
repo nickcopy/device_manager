@@ -6,7 +6,7 @@ import client from "../../libs/server/client";
 //   name: string;
 // };
 interface ResqonseDataType {
-  name: String;
+  ok: boolean;
   users: User[];
 }
 export default async function handler(
@@ -16,6 +16,6 @@ export default async function handler(
   try {
     const users = await client.user.findMany();
     console.log(users);
-    res.status(200).json({ name: "okokok", users });
+    res.status(200).json({ ok: true, users });
   } catch (err) {}
 }
