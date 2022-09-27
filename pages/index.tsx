@@ -1,96 +1,63 @@
-import { User } from "@prisma/client";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Counter from "../components/Counter";
-import client from "../libs/server/client";
+import Link from "next/link";
+import setting from "./setting";
+import Layout from "../components/Layout";
+
 const Home: NextPage = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [rename, setreName] = useState("");
-  // const router = useRouter();
-  function 사용자추가() {
-    fetch("/api/adduser")
-      .then((res) => res.json())
-      .then(
-        (json) => setUsers([...users, json.user])
-        // users.push(json.user)
-      );
-    // router.reload();
-  }
-  // function 사용자추가함수() {
-  //   client.user.create({ data: { name: "콩순이", age: 20, addr: "인터넷" } });
-  // }
-  function 사용자삭제(targetID: string) {
-    fetch(`/api/user/delete/${targetID}`)
-      .then((res) => res.json())
-      .then((json) => {
-        const filterUser = users.filter((user) => user.id !== json.deletedId);
-
-        setUsers(filterUser);
-        console.log("여기서 실행하자");
-        console.log(json.deletedId);
-      });
-  }
-
-  function 이름변경(targetID: String) {
-    if (!rename) return;
-    const data = { name: rename };
-    fetch(`/api/user/update/${targetID}`, {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    console.log(`${targetID}의 이름을 ${rename}으로`);
-  }
-  useEffect(() => {
-    //컴포넌트가 실행 될떄 한번만 출력
-    fetch("/api/alluser")
-      .then((res) => res.json())
-      .then((json) => setUsers(json.users));
-  }, []);
   return (
-    <div>
-      <Counter aboutName={"이진우"} startDate={20220926} />
-      <button className="bg-gray-300 rounded m-2" onClick={사용자추가}>
-        사용자 추가
-      </button>
-
-      <div className="flex flex-wrap">
-        {users.map((user) => {
-          return (
-            <div key={user.id} className="border-2">
-              <div className="text-2xl font-bold">
-                <span>{user.name}</span>
-                <span> 나이:{user.age}</span>
-              </div>
-              <div>{user.addr}</div>
-              <div>{user.fayfood}</div>
-              <div>{user.createAt.toString()}</div>
-              <div>{user.id}</div>
-              <div>
-                <input
-                  type={"text"}
-                  className="border"
-                  value={rename}
-                  onChange={(e) => setreName(e.currentTarget.value)}
-                />
-                <button
-                  className="bg-gray-200 text-blue-200 px-2 "
-                  onClick={() => 이름변경(user.id)}
+    <Layout title="HEME">
+      <div className="h-full   p-8 space-y-7">
+        <div id="웰컴메시지" className="flex justify-between items-center">
+          <div>
+            <div className="text-4xl">Hello kss</div>
+            <div className="text-gray-500">wellcome back to home</div>
+          </div>
+          <div>
+            <Link href={"/setting"}>
+              <button className=" space-x-2 s_btn py-4 px-5 rounded-lg flex">
+                <span data-coment={"+아이콘"}>Add Divese</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
                 >
-                  수정
-                </button>
-              </div>
-              <button
-                onClick={() => 사용자삭제(user.id)}
-                className="bg-gray-200 test-red-200 px-1 rounded hover:bg-gray-300"
-              >
-                사용자 삭제
+                  <path
+                    fillRule="evenodd"
+                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </button>
+            </Link>
+          </div>
+        </div>
+        <div id="d링크드투유 " className="flex justify-between items-center">
+          <div className="text-3xl font-bold">Linked to you</div>
+          <div></div>
+        </div>
+        <div id="쎈서들" className="flex flex-wrap ">
+          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((devise, idx) => (
+            <div
+              key={idx}
+              data-coment="장비카드"
+              className="m-3 bg-[#A7E2ED] dark:bg-[#313538] border-2 w-60 h-52 p-4 flex flex-col justify-between rounded-xl"
+            >
+              <div className=" flex justify-end items-end">
+                <span className="text-5xl">25</span>
+                <span className="text-2xl text-gray-500">%</span>
+              </div>
+              <div className=" flex flex-col">
+                <span className="text-gray-500">
+                  안방-메모메모메모ㅍ메모메모
+                </span>
+                <span className="text-2xl">샤오미 공기청정기</span>
+              </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
