@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import Layout from "../components/Layout";
 
-const data: NextPage = () => {
+const Data: NextPage = () => {
   const [getDievice, setGetDevice] = useState<Device[]>([]);
   const [getId, setGetId] = useState("");
   const [value, setValue] = useState("");
@@ -34,11 +34,13 @@ const data: NextPage = () => {
         }
       });
   }
+
   useEffect(() => {
     fetch("/api/device/all")
       .then((res) => res.json())
       .then((json) => setGetDevice(json.alldevice));
   }, []);
+
   return (
     <Layout title="data">
       <div className="p-4  space-y-6">
@@ -85,4 +87,4 @@ const data: NextPage = () => {
   );
 };
 
-export default data;
+export default Data;

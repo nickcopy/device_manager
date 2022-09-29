@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import Layout from "../components/Layout";
 
-const setting: NextPage = () => {
+const Setting: NextPage = () => {
   const router = useRouter();
   const [location, setLocation] = useState("");
   const [product, setproduct] = useState("");
@@ -73,8 +73,6 @@ const setting: NextPage = () => {
         } else {
           seterrorMessage("등록에 실패했습니다");
         }
-
-        console.log(json);
       });
   }
   function 장치삭제(장치ID: string) {
@@ -231,4 +229,4 @@ const setting: NextPage = () => {
   );
 };
 
-export default setting;
+export default Setting;
