@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "react-toggle/style.css";
 .s_btn {
   @apply dark:bg-[#2B3737] dark:hover:bg-[#3A9473] hover:bg-[#306455] bg-[#E4F0FA];
 }

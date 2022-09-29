@@ -1,26 +1,34 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import setting from "./setting";
 import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
-import { useStyleRegistry } from "styled-jsx";
 import { Device } from "@prisma/client";
 import DeviceCard from "../components/DeviceCard";
-
+import Toggle from "react-toggle";
+import { ClimbingBoxLoader } from "react-spinners";
 const Home: NextPage = () => {
   const [devices, setDevices] = useState<Device[]>([]);
+  const [bToggle, setbToggle] = useState(true);
   useEffect(() => {
     fetch("/api/device/all")
       .then((res) => res.json())
       .then((json) => setDevices(json.alldevice));
   }, []);
-
+  function 토글변경() {
+    setbToggle(!bToggle);
+    console.log(`토글변경됨-${!bToggle}`);
+    if (!bToggle) {
+      console.log("실시간온");
+    } else {
+    }
+    console.log("실시간OFF");
+  }
   return (
     <Layout title="HEME">
       <div className="h-full   p-8 space-y-7">
         <div id="웰컴메시지" className="flex justify-between items-center">
           <div>
-            <div className="text-4xl">Hello kss</div>
+            <div className="text-4xl">Hello LJW</div>
             <div className="text-gray-500">wellcome back to home</div>
           </div>
           <div>
@@ -45,12 +53,26 @@ const Home: NextPage = () => {
         </div>
         <div id="d링크드투유 " className="flex justify-between items-center">
           <div className="text-3xl font-bold">Linked to you</div>
-          <div></div>
+          <div className="select-none flex items-center space-x-2">
+            {bToggle && <ClimbingBoxLoader color="#36d7b7" size={20} />}
+            <Toggle
+              id="cheese-status"
+              defaultChecked={bToggle}
+              onChange={토글변경}
+            />
+            <label htmlFor="cheese-status">
+              실시간 <span>{bToggle ? "ON" : "OFF"}</span>
+            </label>
+          </div>
         </div>
         <div id="쎈서들" className="flex flex-wrap ">
           {0 < devices.length ? null : <div>디바이스가 없습니다</div>}
           {devices.map((device, idx) => (
-            <DeviceCard key={idx} device={device}></DeviceCard>
+            <DeviceCard
+              key={idx}
+              device={device}
+              realTime={bToggle}
+            ></DeviceCard>
           ))}
         </div>
       </div>

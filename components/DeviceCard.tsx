@@ -1,18 +1,37 @@
 import { Device } from "@prisma/client";
+import { NodejsRequestData } from "next/dist/server/web/types";
 import { useEffect, useState } from "react";
 
 interface DeviceCard {
   device: Device;
+  realTime: Boolean;
 }
-export default function DeviceCard({ device }: DeviceCard) {
+export default function DeviceCard({ device, realTime }: DeviceCard) {
   const [value, setValue] = useState(0);
+  const [timerid, setTimerid] = useState<NodeJS.Timer>();
+
   useEffect(() => {
+    console.log(`${device.id}-${realTime}`);
+
+    if (realTime) {
+      const tempTimerid = setInterval(() => {
+        sencingdataTime();
+        console.log("실시간ON");
+      }, 5000);
+      setTimerid(tempTimerid);
+    } else {
+      clearTimeout(timerid);
+    }
+  }, [realTime]);
+
+  useEffect(() => {
+    sencingdataTime();
+  }, []);
+  function sencingdataTime() {
     fetch(`/api/sencing/${device.id}`)
       .then((res) => res.json())
       .then((json) => setValue(json.value));
-    console.log(device.id);
-  }, []);
-
+  }
   return (
     <div
       data-coment="장비카드"

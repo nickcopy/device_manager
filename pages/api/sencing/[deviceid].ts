@@ -65,5 +65,7 @@ export default async function handler(
     }
   } catch (err) {
     response.status(200).json({ ok: false, error: `멸망.........${err}` });
+  } finally {
+    await client.$disconnect();
   }
 }

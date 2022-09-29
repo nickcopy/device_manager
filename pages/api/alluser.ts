@@ -17,5 +17,8 @@ export default async function handler(
     const users = await client.user.findMany();
     console.log(users);
     res.status(200).json({ ok: true, users });
-  } catch (err) {}
+  } catch (err) {
+  } finally {
+    await client.$disconnect();
+  }
 }
