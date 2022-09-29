@@ -2,8 +2,19 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import setting from "./setting";
 import Layout from "../components/Layout";
+import { useEffect, useState } from "react";
+import { useStyleRegistry } from "styled-jsx";
+import { Device } from "@prisma/client";
+import DeviceCard from "../components/DeviceCard";
 
 const Home: NextPage = () => {
+  const [devices, setDevices] = useState<Device[]>([]);
+  useEffect(() => {
+    fetch("/api/device/all")
+      .then((res) => res.json())
+      .then((json) => setDevices(json.alldevice));
+  }, []);
+
   return (
     <Layout title="HEME">
       <div className="h-full   p-8 space-y-7">
@@ -37,23 +48,9 @@ const Home: NextPage = () => {
           <div></div>
         </div>
         <div id="쎈서들" className="flex flex-wrap ">
-          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((devise, idx) => (
-            <div
-              key={idx}
-              data-coment="장비카드"
-              className="m-3 bg-[#A7E2ED] dark:bg-[#313538] border-2 w-60 h-52 p-4 flex flex-col justify-between rounded-xl"
-            >
-              <div className=" flex justify-end items-end">
-                <span className="text-5xl">25</span>
-                <span className="text-2xl text-gray-500">%</span>
-              </div>
-              <div className=" flex flex-col">
-                <span className="text-gray-500">
-                  안방-메모메모메모ㅍ메모메모
-                </span>
-                <span className="text-2xl">샤오미 공기청정기</span>
-              </div>
-            </div>
+          {0 < devices.length ? null : <div>디바이스가 없습니다</div>}
+          {devices.map((device, idx) => (
+            <DeviceCard key={idx} device={device}></DeviceCard>
           ))}
         </div>
       </div>

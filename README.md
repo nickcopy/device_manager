@@ -120,3 +120,31 @@ useEffect(() => {
 
 `// @ts-ignore`
 위에 코드는 typescript를 밑에 한줄만 잠시 우회하는 코드이다. \*주의: 잠시만 오류을 우회하는 방법일뿐 해결점이 될수는 없다.
+
+# prisma 릴레이션 외래키지정하는법
+
+```
+model Device {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  product  String
+  location String
+  unit     String
+  memo     String?
+  type     String //co2 HUMI TEMP
+  createAt DateTime  @default(now())
+  updataAt DateTime  @updatedAt
+  sencings Sencing[]
+}
+
+model Sencing {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  updataAt DateTime @updatedAt
+  value    Float
+  Device   Device?  @relation(fields: [deviceId], references: [id])
+  deviceId String?  @db.ObjectId
+}
+```
+
+model Sencing를 device에서 배열로 만들어 주고 저장하면 자동으로
+관계를 맺어줌

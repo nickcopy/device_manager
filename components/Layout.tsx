@@ -37,17 +37,26 @@ export default function Layout(props: LayoutProps) {
             </svg>
           </div>
         </header>
-        <div className="h-[80vh] overflow-y-scroll">{props.children}몸통</div>
+        <div className="h-[80vh] overflow-y-scroll">{props.children}</div>
         <footer className="h-[100px]  border-t-4">
           <nav className="flex justify-between h-full">
             <Link href={"/"}>
               <button
                 className={cls(
-                  "border-2 w-full flex items-center justify-center hover:bg-slate-500 dark:hover:bg-gray-700",
-                  reuter.pathname === "/" ? " bg-red-500" : " "
+                  "border-2 w-full flex flex-col items-center justify-center hover:bg-slate-500 dark:hover:bg-gray-700"
                 )}
               >
-                <div className="flex flex-col justify-center items-center  ">
+                {reuter.pathname === "/" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-12 h-12"
+                  >
+                    <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                    <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+                  </svg>
+                ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -62,6 +71,8 @@ export default function Layout(props: LayoutProps) {
                       d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
                     />
                   </svg>
+                )}
+                <div className="flex flex-col justify-center items-center  ">
                   <div>HOME</div>
                 </div>
               </button>
@@ -69,11 +80,20 @@ export default function Layout(props: LayoutProps) {
             <Link href={"/data"}>
               <button
                 className={cls(
-                  "border-2 w-full flex items-center justify-center hover:bg-slate-500 dark:hover:bg-gray-700",
-                  reuter.pathname === "/data" ? " bg-red-500" : " "
+                  "border-2 w-full flex flex-col items-center justify-center hover:bg-slate-500 dark:hover:bg-gray-700"
                 )}
               >
-                <div className="flex flex-col justify-center items-center  ">
+                {reuter.pathname === "/data" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-12 h-12"
+                  >
+                    <path d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
+                    <path d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
+                  </svg>
+                ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -88,6 +108,8 @@ export default function Layout(props: LayoutProps) {
                       d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
                     />
                   </svg>
+                )}
+                <div className="flex flex-col justify-center items-center  ">
                   <div>DATA</div>
                 </div>
               </button>
@@ -95,11 +117,23 @@ export default function Layout(props: LayoutProps) {
             <Link href={"/setting"}>
               <button
                 className={cls(
-                  "border-2 w-full flex items-center justify-center hover:bg-slate-500 dark:hover:bg-gray-700",
-                  reuter.pathname === "/setting" ? " bg-red-500" : " "
+                  "border-2 w-full flex flex-col items-center justify-center hover:bg-slate-500 dark:hover:bg-gray-700"
                 )}
               >
-                <div className="flex flex-col justify-center items-center  ">
+                {reuter.pathname === "/setting" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-12 h-12"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -119,6 +153,8 @@ export default function Layout(props: LayoutProps) {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
+                )}
+                <div className="flex flex-col justify-center items-center  ">
                   <div>SETTING</div>
                 </div>
               </button>

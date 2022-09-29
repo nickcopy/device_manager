@@ -27,3 +27,30 @@ model Post {
   createAt DateTime @default(now())
   updataAt DateTime @updatedAt
 }
+
+enum DeviceType {
+  TEMP
+  HUMI
+  CO2
+}
+
+model Device {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  product  String
+  location String     @default("거실")
+  unit     String
+  memo     String?
+  type     DeviceType //co2 HUMI TEMP
+  createAt DateTime   @default(now())
+  updataAt DateTime   @updatedAt
+  sencings Sencing[]
+}
+
+model Sencing {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  updataAt DateTime @updatedAt
+  value    Float
+  Device   Device?  @relation(fields: [deviceId], references: [id])
+  deviceId String?  @db.ObjectId
+}
